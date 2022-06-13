@@ -1,0 +1,23 @@
+
+.wrapper-ghi{
+  padding: 24px;
+}
+
+.wrapper-ghi > h1{ 
+  color:white;
+}
+
+.wrapper-extras{ 
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  margin: 0px 16px;
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+.wrapper-ghi-selected{
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  padding: 24px;
+  margin: 0px 16px;
+}
