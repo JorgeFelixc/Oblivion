@@ -60,7 +60,7 @@ const PokeSearch = ({ pokemons }: any) => {
         data={pokemons}
         disabled={uiState.loading}
         icon={<BiSearch />}
-        onChange={Debounce(handleSelect, 800)}
+        onChange={Debounce(handleSelect, 300)}
         transition="fade"
         transitionDuration={120}
         transitionTimingFunction="ease"
