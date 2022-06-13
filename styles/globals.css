@@ -135,3 +135,34 @@ nav > a:nth-child(2){
   justify-content: center;
   align-items: center;
 }
+
+.row{
+  display: flex;
+}
+
+.blured-input  input{
+  background-color:rgba(255, 255, 255, 0.1);
+  backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: rgb(2 1 1 / 10%) 0px 5px 20px -5px;
+  transition: 0.2s all;
+}
+
+.wrapper-components{
+  margin: 0px 24px;
+  padding: 0px 24px;
+}
+
+.wrapper-pokecard{
+  /* min-height: 25vh; */
+  margin: 24px 0px;
+  padding: 24px;
+  border-radius: 5px;
+
+}
+
+.column-center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

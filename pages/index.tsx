@@ -9,17 +9,19 @@ import anime from "animejs";
 import Desktop from "../components/templates/Desktop";
 import NavItem from "../components/templates/Desktop/Menu";
 import dynamic from "next/dynamic";
+import { Input } from "@mantine/core";
+import PokeSearch from "../components/templates/Pokesearch";
 const Sketch = dynamic(() => import("../components/templates/Sketch"), {
   ssr: false,
 });
 
-const Home: NextPage = () => {
+const Home: NextPage = (props: any) => {
   const element = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     if (!!element.current) {
       const tl = anime.timeline({
-        duration: 3000,
+        duration: 1000,
         easing: "easeOutExpo",
       });
 
@@ -84,9 +86,10 @@ const Home: NextPage = () => {
           <div className="wrapper-content">
             <div className="row">
               <div className="column">
-                <h1>Jorge Felix</h1>
-                <h2>Frontend Developer</h2>
+                <h1 className="text-8xl">Jorge Felix</h1>
+                <h2 className="text-6xl font-light">Frontend Developer</h2>
               </div>
+              <PokeSearch pokemons={props.pokemons} />
             </div>
           </div>
         </div>
@@ -94,5 +97,21 @@ const Home: NextPage = () => {
     </div>
   );
 };
+
+export async function getStaticProps() {
+  const pokemonsUrl = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
+  const pokemonService = await fetch(pokemonsUrl);
+  const pokemonData = await pokemonService.json();
+
+  return {
+    props: {
+      pokemons: pokemonData.results.map((val: any) => ({
+        ...val,
+        value: val.name,
+      })),
+      pokemonsService: pokemonData,
+    },
+  };
+}
 
 export default Home;
