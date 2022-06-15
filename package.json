@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && next export && git add out/ && git commit -m \"Deploy gh-pages\" && git subtree push --prefix out origin gh-pages"
+    "deploy": "npx next build && npx next export && git add out/ && git commit -m \"Deploy gh-pages\" && git subtree push --prefix out origin gh-pages"
   },
   "dependencies": {
     "@mantine/core": "^4.1.4",
@@ -33,7 +33,8 @@
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-icons": "^4.4.0",
-    "react-motion": "^0.5.2"
+    "react-motion": "^0.5.2",
+    "react-scroll-parallax": "^3.2.0"
   },
   "devDependencies": {
     "@types/node": "17.0.24",

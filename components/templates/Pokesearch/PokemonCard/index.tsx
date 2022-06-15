@@ -1,6 +1,9 @@
-import { Loader } from "@mantine/core";
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
+
+import Image from "next/image";
+
+import { Loader } from "@mantine/core";
 import { BiSad, BiAngry } from "react-icons/bi";
 
 const PokemonCard = ({ loading, error, pokemonInfo }: any) => {
@@ -26,7 +29,7 @@ const PokemonCard = ({ loading, error, pokemonInfo }: any) => {
 
 const LoadingState = () => (
   <div className="blured wrapper-pokecard column-center ">
-    <Loader />
+    <Loader variant="bars" />
   </div>
 );
 
