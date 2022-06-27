@@ -9,7 +9,10 @@ const listConfiguration = {
   name: "TodoList",
 };
 
-interface List {
+interface BaseList {
+  _id: string;
+}
+interface List extends BaseList {
   title: string;
   completed: boolean;
   date: string;
@@ -28,7 +31,7 @@ const Tasks = () => {
     });
   };
 
-  const handleUpdateItem = (item: List & { _id: string }) => {
+  const handleUpdateItem = (item: List) => {
     updateItem({ ...item, completed: !item.completed });
   };
 
@@ -68,7 +71,7 @@ const Tasks = () => {
 
 interface CardProps {
   list: List;
-  onToggleComplete: (item: List & { _id: string }) => void;
+  onToggleComplete: (item: List) => void;
 }
 
 const TaskCard = ({ list, onToggleComplete }: CardProps) => {

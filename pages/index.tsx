@@ -95,7 +95,7 @@ const Home: NextPage = (props: any) => {
         </div>
         <Nav />
         <section className="main-container">
-          {/* <Sketch variant="flow" customClass="p-0" /> */}
+          <Sketch variant="flow" customClass="p-0" />
           <div className="blured"></div>
           <div className="wrapper-content">
             <div className="row">
