@@ -5,7 +5,7 @@ import Head from "next/head";
 import { GiAnimalSkull } from "react-icons/gi";
 import { AiOutlineMail } from "react-icons/ai";
 import { TiSocialLinkedin } from "react-icons/ti";
-import { FiGithub } from "react-icons/fi";
+import { BiBulb } from "react-icons/bi";
 
 import anime from "animejs";
 import Desktop from "../components/templates/Desktop";
@@ -17,6 +17,7 @@ import { useWindowScroll } from "@mantine/hooks";
 import { Nav } from "../components/templates/Nav";
 import { CardMe } from "../components/templates/IndexComponents/Card";
 import { Parallax } from "react-scroll-parallax";
+import DemoDashboard from "../components/templates/DemoDashboard";
 const Sketch = dynamic(() => import("../components/templates/Sketch"), {
   ssr: false,
 });
@@ -94,7 +95,7 @@ const Home: NextPage = (props: any) => {
         </div>
         <Nav />
         <section className="main-container">
-          <Sketch variant="flow" customClass="p-0" />
+          {/* <Sketch variant="flow" customClass="p-0" /> */}
           <div className="blured"></div>
           <div className="wrapper-content">
             <div className="row">
@@ -102,31 +103,36 @@ const Home: NextPage = (props: any) => {
                 <h1 className="text-8xl">Jorge Felix</h1>
                 <h2 className="text-6xl font-light">Software Developer</h2>
               </div>
-              <PokeSearch pokemons={props.pokemons} />
+              {/* <PokeSearch pokemons={props.pokemons} /> */}
             </div>
           </div>
         </section>
-        <section className="wrapper-sect">
-          <svg viewBox="0 0 1440 320">
-            <path fill="#0f0f0f" d={WavePath} />
-          </svg>
-          <div className="p-6 flex self-center h-full">
-            <Parallax translateX={["-50px", "0px"]} rotate={[0, 0]}>
-              <WhyMySiteRender />
-            </Parallax>
-            <Parallax speed={90} translateX={["50px", "0px"]}>
-              <CardMe
-                tech={TechStack}
-                name="Jorge E. Felix Cazarez"
-                image="/me.jpg"
-              />
-            </Parallax>
-          </div>
-        </section>
+
+        <DemoDashboard />
       </main>
     </div>
   );
 };
+
+const AboutMeSection = () => (
+  <section className="wrapper-sect">
+    <svg viewBox="0 0 1440 320">
+      <path fill="#0f0f0f" d={WavePath} />
+    </svg>
+    <div className="p-6 flex self-center h-full">
+      <Parallax translateX={["-50px", "0px"]} rotate={[0, 0]}>
+        <WhyMySiteRender />
+      </Parallax>
+      <Parallax speed={90} translateX={["50px", "0px"]}>
+        <CardMe
+          tech={TechStack}
+          name="Jorge E. Felix Cazarez"
+          image="/me.jpg"
+        />
+      </Parallax>
+    </div>
+  </section>
+);
 
 const WhyMySiteRender = () => (
   <div className="column-middle h-full">
@@ -145,11 +151,11 @@ export async function getStaticProps() {
 
   return {
     props: {
-      pokemons: pokemonData.results.map((val: any) => ({
-        ...val,
-        value: val.name,
-      })),
-      pokemonsService: pokemonData,
+      // pokemons: pokemonData.results.map((val: any) => ({
+      //   ...val,
+      //   value: val.name,
+      // })),
+      // pokemonsService: pokemonData,
     },
   };
 }

@@ -48,7 +48,7 @@ const draw = (context: p5InstanceExtensions) => {
       const index = i + j * col;
       const angle = noise(xoff, yoff, zoff) * context.TWO_PI * 4;
       const vector = Vector.fromAngle(angle);
-      vector.setMag(0.15);
+      vector.setMag(0.05);
       flowfield[index] = vector;
       xoff += inc;
       context.stroke(255, 50);

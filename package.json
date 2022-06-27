@@ -25,6 +25,7 @@
     "@types/lodash": "^4.14.182",
     "@types/p5": "^1.4.2",
     "@types/react-icons": "^3.0.0",
+    "@types/react-motion": "^0.0.33",
     "animejs": "^3.2.1",
     "dayjs": "^1.11.1",
     "lodash": "^4.17.21",
@@ -34,7 +35,8 @@
     "react-dom": "18.0.0",
     "react-icons": "^4.4.0",
     "react-motion": "^0.5.2",
-    "react-scroll-parallax": "^3.2.0"
+    "react-scroll-parallax": "^3.2.0",
+    "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
     "@types/node": "17.0.24",

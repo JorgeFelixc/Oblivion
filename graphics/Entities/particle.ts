@@ -12,7 +12,7 @@ export default class Particle {
   public maxspeed = 2;
   public h = 0;
   public width = 2;
-  public height = 2;
+  public height = 20;
 
   constructor(context: p5InstanceExtensions) {
     const { createVector, height, width } = context;
@@ -54,7 +54,7 @@ export default class Particle {
     // if (this.h > 255) {
     //   this.h = 0;
     // }
-    context.strokeWeight(4);
+    context.strokeWeight(20);
     context.line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
     this.updatePrev();
   }

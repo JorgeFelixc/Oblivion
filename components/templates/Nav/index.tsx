@@ -8,18 +8,14 @@ export const Nav = (props: any) => {
   const NavElement = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const isAfterMain = scroll.y > window.innerHeight - 28;
+    const isAfterMain = scroll.y > window.innerHeight - 300;
     setNavMinimized(isAfterMain);
   }, [scroll]);
 
   return (
     <nav ref={NavElement} className={navMinimized ? "nav-min" : ""}>
-      <h3>勹口尺云巨　乍巳し王乂 {scroll.y}</h3>
-      <a href="#" className="left-auto">
-        About me
-      </a>
-      <a href="#">Works</a>
-      <a href="#">Blog</a>
+      <h3>勹口尺云巨　乍巳し王乂 </h3>
+      {/* {scroll.y} */}
     </nav>
   );
 };
