@@ -2,18 +2,21 @@ import React, { useCallback, useEffect, useRef } from "react";
 import p5 from "p5";
 import FlowSetup from "../../../graphics/flow";
 import ParticleSetup from "../../../graphics/particles";
+import DijkstraSetup from "../../../graphics/dijkstra";
 
+type AvailableSketchs = "flow" | "particles" | "dijkstra";
 interface SketchProps {
-  variant: "flow" | "particles";
+  variant: AvailableSketchs;
   customClass?: string;
 }
 
-interface DynMapping {
-  [key: string]: any;
-}
+type DynMapping = {
+  [key in AvailableSketchs]: any;
+};
 const MappingGraphics: DynMapping = {
   flow: FlowSetup,
   particles: ParticleSetup,
+  dijkstra: DijkstraSetup,
 };
 
 const Sketch = ({ customClass, variant }: SketchProps) => {
@@ -21,7 +24,6 @@ const Sketch = ({ customClass, variant }: SketchProps) => {
   // const [, useSketch] = useState<any>();
 
   const initSketch = useCallback(() => {
-    console.log("What the fuck?");
     const isWindows = typeof window === "undefined";
     if (isWindows) return null;
 

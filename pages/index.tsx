@@ -1,23 +1,17 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 
-import { GiAnimalSkull } from "react-icons/gi";
-import { AiOutlineMail } from "react-icons/ai";
-import { TiSocialLinkedin } from "react-icons/ti";
-import { BiBulb } from "react-icons/bi";
+import { BiX } from "react-icons/bi";
 
-import anime from "animejs";
-import Desktop from "../components/templates/Desktop";
-import NavItem from "../components/templates/Desktop/Menu";
 import dynamic from "next/dynamic";
-import { ActionIcon, Badge, Button, Image, Input } from "@mantine/core";
-import PokeSearch from "../components/templates/Pokesearch";
-import { useWindowScroll } from "@mantine/hooks";
 import { Nav } from "../components/templates/Nav";
 import { CardMe } from "../components/templates/IndexComponents/Card";
 import { Parallax } from "react-scroll-parallax";
-import DemoDashboard from "../components/templates/DemoDashboard";
+import { ActiveIndexAnimation } from "../graphics/Animations";
+import Algorithms from "../components/templates/Algorithms";
+import Script from "next/script";
+import useSound from "../components/hooks/useSound";
 const Sketch = dynamic(() => import("../components/templates/Sketch"), {
   ssr: false,
 });
@@ -38,46 +32,11 @@ const TechStack = [
 
 const Home: NextPage = (props: any) => {
   const element = useRef<HTMLHeadingElement>(null);
+  useSound("hover-sound");
 
   useEffect(() => {
     if (!!element.current) {
-      const tl = anime.timeline({
-        duration: 1000,
-        easing: "easeOutExpo",
-      });
-
-      tl.add({
-        targets: ".clear-initial",
-        opacity: 1,
-        translateY: {
-          value: [-100, 0],
-          duration: 800,
-        },
-      });
-
-      tl.add(
-        {
-          targets: ".wrapper-presentation",
-          height: 50,
-          width: 50,
-          left: "50%",
-          top: "50%",
-          // opacity: 0,
-          color: "#FFF",
-          backgroundColor: "#FFF",
-          borderRadius: 360,
-          duration: 1000,
-        },
-        "+=800"
-      );
-
-      tl.add({
-        targets: ".wrapper-presentation",
-        translateY: -2000,
-        opacity: 0,
-        easing: "easeOutElastic(1, .8)",
-        loop: true,
-      });
+      ActiveIndexAnimation();
     }
   }, [element]);
 
@@ -104,13 +63,62 @@ const Home: NextPage = (props: any) => {
                 <h2 className="text-6xl font-light">Software Developer</h2>
               </div>
               {/* <PokeSearch pokemons={props.pokemons} /> */}
+              <div className="absolute bottom-0 left-0 flex p-6 w-full space-x-5">
+                <SectionButton description="Exercises" mlauto>
+                  <Algorithms />
+                </SectionButton>
+                <SectionButton description="About me" mlauto />
+                <SectionButton description="Examples" mlauto />
+              </div>
             </div>
           </div>
         </section>
-
-        <DemoDashboard />
+        {/* <DemoDashboard /> */}
       </main>
+      <Script src="/init.js" strategy="afterInteractive" />
     </div>
+  );
+};
+
+const SectionButton = ({ description, mlauto, children }: any) => {
+  const [uiState, setUiState] = useState({
+    isMenuOpen: false,
+  });
+
+  const handleOpenMenu = () => {
+    setUiState((prev) => ({ ...prev, isMenuOpen: true }));
+    const audio = new Audio("/click.wav");
+    audio.play();
+  };
+  const handleCloseMenu = () => {
+    setUiState((prev) => ({ ...prev, isMenuOpen: false }));
+    const audio = new Audio("/click.wav");
+    audio.play();
+  };
+
+  const principalClass = mlauto ? "ml-auto btn-exotic" : "btn-exotic";
+
+  return (
+    <>
+      <div className={principalClass} onClick={handleOpenMenu}>
+        <p>{description}</p>
+      </div>
+      <div
+        className={
+          uiState.isMenuOpen
+            ? "wrapper-section-button"
+            : "wrapper-section-button-closed"
+        }
+      >
+        <button
+          className="absolute top-5 right-5 text-2xl "
+          onClick={handleCloseMenu}
+        >
+          <BiX />
+        </button>
+        {children}
+      </div>
+    </>
   );
 };
 
@@ -145,9 +153,9 @@ const WhyMySiteRender = () => (
 );
 
 export async function getStaticProps() {
-  const pokemonsUrl = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
-  const pokemonService = await fetch(pokemonsUrl);
-  const pokemonData = await pokemonService.json();
+  // const pokemonsUrl = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
+  // const pokemonService = await fetch(pokemonsUrl);
+  // const pokemonData = await pokemonService.json();
 
   return {
     props: {

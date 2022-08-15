@@ -8,6 +8,8 @@ import useDashboardComponent from "./DyamicContent";
 import Menu, { GroupSections, Sections } from "./menu";
 import NotFoundDashboard from "./NotFound";
 import dynamic from "next/dynamic";
+import { BiChevronLeft, BiChevronsLeft, BiCog } from "react-icons/bi";
+import { ActionIcon } from "@mantine/core";
 
 const useStore = create((set) => ({
   CurrentComponent: <NotFoundDashboard />,
@@ -37,9 +39,23 @@ const DemoDashboard = () => {
 };
 
 const SideNav = () => {
+  const [expanded, setExpanded] = useState(false);
+  const classeBase = `wrapper-sidenav ${expanded ? "minimized-nav" : ""}`;
+
+  const handleToggleMinimize = () => setExpanded((prev) => !prev);
   return (
-    <div className="wrapper-sidenav">
+    <div className={classeBase}>
       <SideNavMenu groups={Menu} />
+      <div className="mt-auto">
+        <div className="row space-x-2 justify-end ">
+          {/* <ActionIcon variant="hover">
+            <BiCog />
+          </ActionIcon> */}
+          <ActionIcon variant="hover" onClick={handleToggleMinimize}>
+            <BiChevronsLeft className={`${expanded ? "rotate-180" : ""}`} />
+          </ActionIcon>
+        </div>
+      </div>
     </div>
   );
 };

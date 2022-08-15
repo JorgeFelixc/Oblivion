@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, ButtonProps, Modal } from "@mantine/core";
+import { Button, ButtonProps, Checkbox, Modal } from "@mantine/core";
 import { Motion } from "react-motion";
 import DemoDashboard from "..";
 import useList from "../../../hooks/List";
@@ -24,7 +24,7 @@ const Tasks = () => {
 
   const handleAddItem = () => {
     addItem({
-      completed: true,
+      completed: false,
       date: Date.now().toString(),
       title: "Task Example (1)",
       priority: 1,
@@ -75,13 +75,17 @@ interface CardProps {
 }
 
 const TaskCard = ({ list, onToggleComplete }: CardProps) => {
-  const { title, completed } = list;
-  const baseClass = `p-4 object-center wrapper-task-card rounded ${
+  const { title, completed, date } = list;
+  const baseClass = `p-4 object-center wrapper-task-card rounded row ${
     completed ? "task-card-completed" : ""
   }`;
   return (
     <div className={baseClass} onClick={() => onToggleComplete(list)}>
-      <p>{title}</p>
+      <div>
+        <p>{title}</p>
+        <p className="text-xs">{new Date(date).toLocaleString("es-MX")}</p>
+      </div>
+      <Checkbox className="ml-auto" checked={completed} />
     </div>
   );
 };
