@@ -75,7 +75,6 @@ const Home: NextPage = (props: any) => {
         </section>
         {/* <DemoDashboard /> */}
       </main>
-      <Script src="/init.js" strategy="afterInteractive" />
     </div>
   );
 };

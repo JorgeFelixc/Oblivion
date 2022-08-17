@@ -13,13 +13,21 @@ const useSound = (target: string | string[]) => {
     } else {
       const DomHoverElements = document.getElementsByClassName(target);
       for (let i = 0; i < DomHoverElements.length; i++) {
-        DomHoverElements[i].removeEventListener(
-          "mouseenter",
-          handleActiveSound
-        );
         DomHoverElements[i].addEventListener("mouseenter", handleActiveSound);
       }
     }
+
+    return () => {
+      if (!Array.isArray(target)) {
+        const DomHoverElements = document.getElementsByClassName(target);
+        for (let i = 0; i < DomHoverElements.length; i++) {
+          DomHoverElements[i].removeEventListener(
+            "mouseenter",
+            handleActiveSound
+          );
+        }
+      }
+    };
   }, [target]);
 };
 

@@ -44,11 +44,12 @@ const Sketch = ({ customClass, variant }: SketchProps) => {
       };
     });
     // useSketch(newSketch);
-    return () => newSketch.remove();
+    return newSketch;
   }, [parent, variant]);
 
   useEffect(() => {
-    initSketch();
+    const sketch = initSketch();
+    return () => sketch?.remove();
   }, [initSketch]);
 
   return <div ref={parent} className={customClass || ""} />;
