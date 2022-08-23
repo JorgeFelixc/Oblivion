@@ -512,6 +512,8 @@ a:hover{
 
 .wrapper-practice{ 
   width: 100%;
+  user-select: none;
+
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 1px 1px 15px rgba(0, 0, 0, 1);
