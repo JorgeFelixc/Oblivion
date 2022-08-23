@@ -33,14 +33,15 @@ const setup = (
   xscale = windowWidth / scale;
   yscale = windowHeight / scale;
 
+  context.frameRate(45);
   context.background(0);
   for (let i = 0; i < context.windowWidth - scale; i += scale) {
     for (let j = 0; j < context.windowHeight - scale; j += scale) {
       if (i < scale * 3 && j < scale * 3) continue;
-      const show = Math.random() > 0.99;
+      const show = Math.random() > 0.9;
       show && points.push({ x: i, y: j, h: scale, w: scale });
 
-      const other = Math.random() > 0.9995;
+      const other = Math.random() > 0.995;
       const needsPlacedPoints = !show && placedPoint.length < 5 && other;
       needsPlacedPoints && placedPoint.push({ x: i, y: j, h: scale, w: scale });
       // context.rect(i, j, scale, scale);
@@ -62,7 +63,7 @@ const draw = (context: p5InstanceExtensions) => {
 
     context.rect(x, y, w, h);
     context.fill(255);
-    number && context.text(number, x + 4, y + 15);
+    number && context.text(number, x + 7, y + 18);
   });
 
   placedPoint.forEach(({ x, y, h, w }) => {
@@ -74,7 +75,8 @@ const draw = (context: p5InstanceExtensions) => {
 
   const newExpansion: Points[] = [];
   const maxNumber = neighboors[neighboors.length - 1]?.number || 0;
-  currentExpansion.forEach(({ x, y, h, w, number }) => {
+  currentExpansion.forEach((point) => {
+    const { x, y, h, w } = point;
     context.stroke(0, 150, 0);
     context.fill(0, 150, 0);
 
@@ -83,31 +85,63 @@ const draw = (context: p5InstanceExtensions) => {
     const xscaled = x + scale;
     const yscaled = y + scale;
 
-    const itsXPushed = newExpansion.some((xpoints) => xpoints.x === xscaled);
-    const itsYPushed = newExpansion.some((ypoints) => ypoints.y === yscaled);
+    const xnegative = x - scale;
+    const ynegative = y - scale;
 
-    const existPointX = points.some(
-      (point) => point.x === xscaled && point.y === y
-    );
-    const existPointY = points.some(
-      (point) => point.y === yscaled && point.x === x
+    const itsXPushed = newExpansion.some((p) => p.x === xscaled && p.y === y);
+    const itsXNegPushed = newExpansion.some(
+      (p) => p.x === xnegative && p.y === y
     );
 
-    if (xscaled < context.windowWidth && !itsXPushed && !existPointX) {
+    const itsYPushed = newExpansion.some((p) => p.y === yscaled && p.x === x);
+    const itsYNegPushed = newExpansion.some(
+      (p) => p.y === ynegative && p.x === x
+    );
+
+    // X POSITIVE
+    const existPointX = points.some((p) => p.x === xscaled && p.y === y);
+    const isXPosPlaced = neighboors.some((n) => n.x === xscaled && n.y === y);
+    const isXPositive = !itsXPushed && !existPointX && !isXPosPlaced;
+    if (xscaled < context.windowWidth && isXPositive) {
       newExpansion.push({
+        ...point,
         x: x + scale,
-        y,
-        h,
-        w,
         number: maxNumber + 1,
       });
     }
-    if (yscaled < context.windowHeight && !itsYPushed && !existPointY) {
+
+    // Y POSITIVE
+    const existPointY = points.some((p) => p.y === yscaled && p.x === x);
+    const isYPosPlaced = neighboors.some((n) => n.y === yscaled && n.x === x);
+    const isYPositive = !itsYPushed && !existPointY && !isYPosPlaced;
+    if (yscaled < context.windowHeight && isYPositive) {
       newExpansion.push({
-        x,
+        ...point,
         y: y + scale,
-        h,
-        w,
+        number: maxNumber + 1,
+      });
+    }
+
+    // X NEGATIVE
+    const existPointXQ = points.some((p) => p.x === xnegative && p.y === y);
+    const isXNegPlaced = neighboors.some((n) => n.x === xnegative && n.y === y);
+    const isXNegative = !isXNegPlaced && !existPointXQ && !itsXNegPushed;
+    if (xnegative > -1 && isXNegative) {
+      newExpansion.push({
+        ...point,
+        x: x - scale,
+        number: maxNumber + 1,
+      });
+    }
+
+    // Y NEGATIVE
+    const existPointYQ = points.some((p) => p.y === ynegative && p.x === x);
+    const isYNegPlaced = neighboors.some((n) => n.y === ynegative && n.x === x);
+    const isYNegative = !existPointYQ && !isYNegPlaced && !itsYNegPushed;
+    if (ynegative > -1 && isYNegative) {
+      newExpansion.push({
+        ...point,
+        y: y - scale,
         number: maxNumber + 1,
       });
     }
@@ -123,7 +157,6 @@ const draw = (context: p5InstanceExtensions) => {
     ? newExpansion.length !== 0
     : true;
   if (shouldStopReplacin) {
-    // console.log(newExpansion);
     currentExpansion = newExpansion;
     neighboors = [...neighboors, ...newExpansion];
   }
