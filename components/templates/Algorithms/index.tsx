@@ -9,22 +9,18 @@ const Algorithms = () => {
       <h1 className="mt-12">Algorithms</h1>
       <div className="grid-3x">
         <WorkCard
-          imgSrc="/me.jpg"
+          imgSrc="/uni.jpg"
           title="Dijkstra Algorithm"
           link="/dijkstra"
         />
-        <WorkCard imgSrc="/me.jpg" title="Dijkstra Algorithm" />
-        <WorkCard imgSrc="/me.jpg" title="Dijkstra Algorithm" />
-        <WorkCard imgSrc="/me.jpg" title="Dijkstra Algorithm" />
-        <WorkCard imgSrc="/me.jpg" title="Dijkstra Algorithm" />
-        <WorkCard imgSrc="/me.jpg" title="Dijkstra Algorithm" />
+        <WorkCard imgSrc="/uni.jpg" title="Matriz Deciciones" link="matriz" />
       </div>
 
       <h1 className="mt-12">CSS</h1>
       <div className="grid-3x">
-        <WorkCard imgSrc="/me.jpg" title="Buttons" />
-        <WorkCard imgSrc="/me.jpg" title="Dijkstra Algorithm" />
-        <WorkCard imgSrc="/me.jpg" title="Dijkstra Algorithm" />
+        <WorkCard imgSrc="/uni.jpg" title="Buttons" />
+        <WorkCard imgSrc="/uni.jpg" title="Dijkstra Algorithm" />
+        <WorkCard imgSrc="/uni.jpg" title="Dijkstra Algorithm" />
       </div>
     </div>
   );

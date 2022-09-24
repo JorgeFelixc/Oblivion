@@ -102,19 +102,10 @@ const Matriz = () => {
         className="table"
       />
 
-      <div className="mt-10 flex justify-center text-3xl">
-        <h2>
-          La Mejor PC es: &apos;&apos;{bestComputer.name}&apos;&apos; con{" "}
-          {bestComputer.finalWeight}
-        </h2>
-      </div>
-      <div className="mt-10 flex justify-center text-3xl">
-        <h2>
-          La Peor PC es: &apos;&apos;{worstComputer.name}&apos;&apos; con{" "}
-          {worstComputer.finalWeight}
-        </h2>
-      </div>
-
+      <ResultMessage
+        worstComputer={worstComputer}
+        bestComputer={bestComputer}
+      />
       <Modal
         title="Datos de evaluacion del producto"
         opened={uiState.isModalEvaluation}
@@ -230,5 +221,30 @@ const FormMatriz = ({ onClose, onUpdate }: FormMatrizProps) => {
         </Button>
       </form>
     </div>
+  );
+};
+
+const ResultMessage = ({
+  bestComputer,
+  worstComputer,
+}: {
+  bestComputer: any;
+  worstComputer: any;
+}) => {
+  return (
+    <>
+      <div className="mt-10 flex justify-center text-3xl">
+        <h2>
+          La Mejor PC es: &apos;&apos;{bestComputer?.name}&apos;&apos; con{" "}
+          {bestComputer?.finalWeight}
+        </h2>
+      </div>
+      <div className="mt-10 flex justify-center text-3xl">
+        <h2>
+          La Peor PC es: &apos;&apos;{worstComputer?.name}&apos;&apos; con{" "}
+          {worstComputer?.finalWeight}
+        </h2>
+      </div>
+    </>
   );
 };
