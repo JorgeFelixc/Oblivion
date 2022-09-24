@@ -114,3 +114,10 @@
     flex-direction: column;
   }
 }
+
+th,
+.mantine-Table-root th,
+.table th{
+  text-align: left;
+}
+

@@ -618,8 +618,6 @@ a:hover{
   }
 }
 
-
-
 .pattern-grid{ 
   background-image: linear-gradient(#102C45 1px, transparent 1px),linear-gradient(to right, #102C45 1px, transparent 1px);
   background-size: 50px 50px;
@@ -629,4 +627,15 @@ a:hover{
 .pattern-dots{
   background-image: radial-gradient(rgb(50, 255, 255) 1.5px, transparent 1.5px);
   background-size: calc(10 * 1.5px) calc(10 * 1.5px);
+}
+
+th,
+.mantine-Table-root th,
+.table th{
+  text-align: left;
+}
+
+.table { 
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 8px 16px;
 }
