@@ -1,6 +1,4 @@
-
-
-export interface TableConfig { 
+export interface TableConfig {
   description?: string;
   id: string;
   title: string;
@@ -22,27 +20,42 @@ export const InfoTable: TableConfig[] = [
   },
   {
     id: "ram",
-    title: "RAM"
+    title: "RAM",
   },
   {
     id: "HDD",
-    title: "HDD"
+    title: "HDD",
   },
   {
     id: "cellInStack",
-    title: "Celdas en la pilas"
+    title: "Celdas pilas",
   },
   {
     id: "durationBatery",
-    title: "Duracion de la Bateria"
+    title: "Duracion Bateria",
   },
   {
     id: "wattsConsumption",
-    title: "Consumo de watts"
+    title: "Consumo Watts",
   },
   {
     id: "price",
     title: "Precio",
-    render: ({price}) => <p>{Intl.NumberFormat("MXN", { currency: "MXN", style: "currency" }).format(isNaN(price) ? 0 : price)}</p>
-  }
-]
+    render: ({ price }) => (
+      <p>
+        {Intl.NumberFormat("MXN", {
+          currency: "MXN",
+          style: "currency",
+        }).format(isNaN(price) ? 0 : price)}
+      </p>
+    ),
+  },
+];
+
+export const WeightTable: TableConfig[] = [
+  ...InfoTable,
+  {
+    title: "Final Evaluacion",
+    id: "finalWeight",
+  },
+];

@@ -633,9 +633,28 @@ th,
 .mantine-Table-root th,
 .table th{
   text-align: left;
+  font-weight: normal;
+  font-size: smaller;
 }
 
 .table { 
-  background-color: rgba(0, 0, 0, 0.4);
+  /* background-color: rgba(0, 0, 0, 0.4); */
   padding: 8px 16px;
 }
+
+.matriz-footer{
+  position: fixed;
+  bottom: 0;
+  left:0;
+  padding:16px 96px;
+  width: 100%;
+  background-color: rgb(0,0,0,0.4);
+  backdrop-filter: blur(255px);
+  display: flex;
+
+}
+
+.matriz-footer > button:last-child{
+  margin-left: auto !important;
+}
+
