@@ -18,6 +18,8 @@ let points: Points[] = [];
 
 let neighboors: Points[] = [];
 let currentExpansion: Points[] = [];
+
+let shouldStopAnimate = false;
 // let j;
 
 const setup = (
@@ -82,6 +84,7 @@ const draw = (context: p5InstanceExtensions) => {
 
     context.rect(x, y, w, h);
 
+    if (shouldStopAnimate) return;
     const xscaled = x + scale;
     const yscaled = y + scale;
 
@@ -159,6 +162,8 @@ const draw = (context: p5InstanceExtensions) => {
   if (shouldStopReplacin) {
     currentExpansion = newExpansion;
     neighboors = [...neighboors, ...newExpansion];
+  } else {
+    shouldStopAnimate = true;
   }
 };
 

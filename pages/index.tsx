@@ -12,6 +12,7 @@ import { ActiveIndexAnimation } from "../graphics/Animations";
 import Algorithms from "../components/templates/Algorithms";
 import Script from "next/script";
 import useSound from "../components/hooks/useSound";
+import About from "../components/templates/About";
 const Sketch = dynamic(() => import("../components/templates/Sketch"), {
   ssr: false,
 });
@@ -46,6 +47,7 @@ const Home: NextPage = (props: any) => {
         <title>Jorge Felix | HUB</title>
         <meta name="Jorge HUB" content="Jorge felix Portfolio" />
         <link rel="icon" href="/favicon.ico" />
+        {/* <link rel="manifest" href="/pwa.webmanifest" /> */}
       </Head>
 
       <main>
@@ -67,7 +69,9 @@ const Home: NextPage = (props: any) => {
                 <SectionButton description="Exercises" mlauto>
                   <Algorithms />
                 </SectionButton>
-                <SectionButton description="About me" mlauto />
+                <SectionButton description="About me" mlauto>
+                  <About />
+                </SectionButton>
                 <SectionButton description="Examples" mlauto />
               </div>
             </div>
