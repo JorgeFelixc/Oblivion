@@ -27,6 +27,7 @@ const PrefixSpan = () => {
       setUiState((prev) => ({
         ...prev,
         isLoading: true,
+        isError: false,
       }));
       console.log("Fetching..");
       try {
