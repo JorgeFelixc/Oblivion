@@ -93,10 +93,10 @@ const PrefixSpan = () => {
 
   return (
     <div className={containerClass}>
-      <h1>Data loaded {uiState.data.length}</h1>
+      <h1>Secuencias Cargadas {uiState.data.length}</h1>
       <Autocomplete
         data={getAutocompleteData || []}
-        label="Search your thing"
+        label="Busca tu Secuencia"
         onChange={setTag}
         size="xs"
         className="w-64 mb-8 "
