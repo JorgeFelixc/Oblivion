@@ -13,7 +13,7 @@ const PrefixSpan = () => {
   const [tag, setTag] = useState("");
   const [debounced] = useDebouncedValue(tag, 600);
 
-  const [treshold, setTreshold] = useState<any>("400");
+  const [treshold, setTreshold] = useState<any>("500");
   const [tresholdDebounce] = useDebouncedValue(treshold, 800);
 
   const [uiState, setUiState] = useState({
