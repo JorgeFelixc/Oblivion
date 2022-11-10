@@ -1,16 +1,20 @@
-import { Autocomplete, Badge } from "@mantine/core";
+import { Autocomplete, Badge, NumberInput, TextInput } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import React, { useEffect, useMemo, useState } from "react";
 import Loader from "../components/templates/Loading";
 
 const containerClass =
   "min-h-screen min-w-screen flex flex-col justify-center items-center bg-black ";
-const ApiUrl = "http://localhost:5000/";
-// const ApiUrl = "https://secuentialpattern.herokuapp.com/";
-const fetchApiUlr = () => fetch(ApiUrl).then((res) => res.json());
+// const ApiUrl = "http://localhost:5000/?threshold=";
+const ApiUrl = "https://secuentialpattern.herokuapp.com/?threshold=";
+const fetchApiUlr = (value: string) =>
+  fetch(`${ApiUrl}${value}`).then((res) => res.json());
 const PrefixSpan = () => {
   const [tag, setTag] = useState("");
   const [debounced] = useDebouncedValue(tag, 600);
+
+  const [treshold, setTreshold] = useState<any>("400");
+  const [tresholdDebounce] = useDebouncedValue(treshold, 800);
 
   const [uiState, setUiState] = useState({
     isLoading: true,
@@ -20,9 +24,13 @@ const PrefixSpan = () => {
 
   useEffect(() => {
     (async () => {
+      setUiState((prev) => ({
+        ...prev,
+        isLoading: true,
+      }));
       console.log("Fetching..");
       try {
-        const result = await fetchApiUlr();
+        const result = await fetchApiUlr(tresholdDebounce);
         console.log([result.data]);
         setUiState((prev) => ({
           ...prev,
@@ -33,7 +41,7 @@ const PrefixSpan = () => {
         setUiState((prev) => ({ ...prev, isLoading: false, isError: true }));
       }
     })();
-  }, []);
+  }, [tresholdDebounce]);
 
   const RecomendedData = useMemo(() => {
     const data = uiState.data.filter((item) => debounced === item[0][0][0]);
@@ -77,7 +85,7 @@ const PrefixSpan = () => {
 
   return (
     <div className={containerClass}>
-      <h1>This is Data</h1>
+      <h1>Data loaded {uiState.data.length}</h1>
       <Autocomplete
         data={getAutocompleteData || []}
         label="Search your thing"
@@ -88,6 +96,14 @@ const PrefixSpan = () => {
       <div className="flex flex-col">
         <RecomendedPaths pathData={RecomendedData} />
         <RenderPaths pathData={uiState.data} />
+      </div>
+
+      <div className="fixed left-5 bottom-5">
+        <NumberInput
+          label="Treshold"
+          onChange={setTreshold}
+          defaultValue={parseInt(treshold)}
+        />
       </div>
     </div>
   );
