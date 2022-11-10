@@ -71,6 +71,13 @@ const PrefixSpan = () => {
     return (
       <div className={containerClass}>
         <h3>Error :(</h3>
+        <div className="fixed left-5 bottom-5">
+          <NumberInput
+            label="Treshold"
+            onChange={setTreshold}
+            defaultValue={parseInt(treshold)}
+          />
+        </div>
       </div>
     );
   }
